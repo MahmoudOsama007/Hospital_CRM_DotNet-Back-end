@@ -85,7 +85,16 @@ namespace Test1_Blue_Api.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpGet("calltype/{callTypeId}")]
+        public async Task<ActionResult<IEnumerable<CallAboutDto>>> GetCallAboutsByCallTypeId(int callTypeId)
+        {
+            var callAbouts = await _context.CallAbouts
+                .Include(ca => ca.CallType) // Include CallType to check its status
+                .Where(ca => ca.IsActive && ca.CallType.IsActive && ca.CallTypeId == callTypeId) // Filter by CallTypeId
+                .ToListAsync();
 
+            return Ok(_mapper.Map<IEnumerable<CallAboutDto>>(callAbouts));
+        }
         [HttpPatch("{id}/restore")]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> RestoreCallAbout(int id)

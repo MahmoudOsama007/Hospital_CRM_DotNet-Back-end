@@ -103,7 +103,20 @@ namespace Test1_Blue_Api.Controllers
             return NoContent();
         }
 
+        [HttpGet("callabout/{callAboutId}")]
+        public async Task<ActionResult<IEnumerable<CallServiceDto>>> GetCallServicesByCallAboutId(int callAboutId)
+        {
+            var callServices = await _context.CallServices
+                .Where(cs => cs.CallAboutId == callAboutId && cs.IsActive && !cs.IsDeleted)
+                .ToListAsync();
 
+            if (callServices.Count == 0)
+            {
+                return NotFound("No call services found for the specified Call About ID.");
+            }
+
+            return Ok(_mapper.Map<IEnumerable<CallServiceDto>>(callServices));
+        }
 
 
 

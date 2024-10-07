@@ -141,5 +141,24 @@ namespace Test1_Blue_Api.Controllers
 
             return NoContent();
         }
+
+
+        // GET: api/majorspecialist/hospital/{hospitalId}
+        [HttpGet("hospital/{hospitalId}")]
+        public async Task<ActionResult<IEnumerable<MajorSpecialistDto>>> GetMajorSpecialistsByHospitalId(int hospitalId)
+        {
+            var specialists = await _context.MajorSpecialists
+                .Where(s => s.HospitalId == hospitalId && !s.IsDeleted) // Assuming there's a HospitalId property in MajorSpecialist
+                .ToListAsync();
+
+            if (specialists == null || specialists.Count == 0)
+            {
+                return NotFound(); // Or return an empty list if that is preferred
+            }
+
+            return Ok(_mapper.Map<IEnumerable<MajorSpecialistDto>>(specialists));
+        }
+
+
     }
 }
