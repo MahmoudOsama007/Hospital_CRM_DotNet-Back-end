@@ -144,5 +144,25 @@ namespace Test1_Blue_Api.Controllers
 
             return NoContent();
         }
+
+
+        // GET: api/veryspecificspecialist/byminorspecialist/{minorSpecialistId}
+        [HttpGet("byminorspecialist/{minorSpecialistId}")]
+        public async Task<ActionResult<IEnumerable<VerySpecificSpecialistDto>>> GetVerySpecificSpecialistsByMinorSpecialistId(int minorSpecialistId)
+        {
+            // Fetch all VerySpecificSpecialists that are related to the provided MinorSpecialistId
+            var verySpecificSpecialists = await _context.VerySpecificSpecialists
+                .Where(vs => vs.MinorSpecialistId == minorSpecialistId && !vs.IsDeleted)
+                .ToListAsync();
+
+            if (verySpecificSpecialists.Count == 0)
+            {
+                return NotFound("No Very Specific Specialists found for the specified Minor Specialist ID.");
+            }
+
+            // Return the fetched VerySpecificSpecialists after mapping them to DTOs
+            return Ok(_mapper.Map<IEnumerable<VerySpecificSpecialistDto>>(verySpecificSpecialists));
+        }
+
     }
 }

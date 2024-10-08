@@ -155,5 +155,25 @@ namespace Test1_Blue_Api.Controllers
 
             return NoContent();
         }
+
+
+        // GET: api/minorspecialist/bymajorspecialist/{majorSpecialistId}
+        [HttpGet("bymajorspecialist/{majorSpecialistId}")]
+        public async Task<ActionResult<IEnumerable<MinorSpecialistDto>>> GetMinorSpecialistsByMajorSpecialistId(int majorSpecialistId)
+        {
+            var minorSpecialists = await _context.MinorSpecialists
+                .Where(ms => ms.MajorSpecialistId == majorSpecialistId && !ms.IsDeleted)
+                .ToListAsync();
+
+            if (minorSpecialists.Count == 0)
+            {
+                return NotFound("No minor specialists found for the specified Major Specialist ID.");
+            }
+
+            return Ok(_mapper.Map<IEnumerable<MinorSpecialistDto>>(minorSpecialists));
+        }
+
+
+
     }
 }

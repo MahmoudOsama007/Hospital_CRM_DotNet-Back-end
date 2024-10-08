@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string Qualifications { get; set; }
         public string? ContactNumber { get; set; }
-        //public int VerySpecificSpecialistId { get; set; }  // Foreign key to VerySpecificSpecialist
+        public int VerySpecificSpecialistId { get; set; }  // Foreign key to VerySpecificSpecialist
 
 
         public ICollection<Ticket> Ticket { get; set; }
