@@ -9,24 +9,16 @@ namespace Test1_Blue_Api.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string CustomerName { get; set; }
-        [DataType("nvarchar(max)")]
-        public string? Address { get; set; }
-        [Required]
-        //[ForeignKey("Area2")]
-        public string AssignedAreaId { get; set; }
-        [Required]
-        //[ForeignKey("City2")]
-        public string AssignedCityId { get; set; }
-        [Required]
-        //[ForeignKey("Company2")]
-        public string AssignedCompanyId { get; set; }
-        [Required]
-        public string PhoneNumber { get; set; }
-        public string? OtherPhoneNumber { get; set; }
-        public string? LandLineNumber { get; set; }
-        [Required]
-        public int PatientNumber { get; set; }
+        public string? CustomerName { get; set; }
+        //[DataType("nvarchar(max)")]
+        //public string? Address { get; set; }
+
+        //[Required]
+        //public string PhoneNumber { get; set; }
+        //public string? OtherPhoneNumber { get; set; }
+        //public string? LandLineNumber { get; set; }
+        //[Required]
+        //public int? PatientNumber { get; set; }
         
         
         [ForeignKey("Customer")]
@@ -34,9 +26,9 @@ namespace Test1_Blue_Api.Models
         public Customer Customer { get; set; }
 
 
-        public string CallTypeId { get; set; }
-        public string CallAboutId { get; set; }
-        public string CallServiceId { get; set; }
+        public int CallTypeId { get; set; }
+        public int CallAboutId { get; set; }
+        public int CallServiceId { get; set; }
 
 
 
@@ -44,17 +36,17 @@ namespace Test1_Blue_Api.Models
 
         [Required]
         //[ForeignKey("Hospital2")]
-        public string? AssignedHospitalId { get; set; }
+        public int? AssignedHospitalId { get; set; }
 
-        public string? MajorSpecialistId { get; set; }
+        public int? MajorSpecialistId { get; set; }
 
-        public string? MinorSpecialistId { get; set; }
+        public int? MinorSpecialistId { get; set; }
 
-        public string? VerySpecificSpecialistId { get; set; }
+        public int? VerySpecificSpecialistId { get; set; }
 
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
-  
+        public int? TicketNumber { get; set; }
 
 
         public DateTime? CreationDate { get; set; } = DateTime.Now;

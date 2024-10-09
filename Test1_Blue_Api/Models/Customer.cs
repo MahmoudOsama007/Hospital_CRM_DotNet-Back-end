@@ -14,9 +14,13 @@ namespace Test1_Blue_Api.Models
         [Required]
         [ForeignKey("Area")]
         public int AreaId { get; set; }
+        public Area Area { get; set; }  // Navigation property
+
         [Required]
         [ForeignKey("Company")]
         public int CompanyId { get; set; }
+        public Company Company { get; set; }  // Navigation property
+
 
         [Required]
         public string PhoneNumber { get; set; }
@@ -28,9 +32,7 @@ namespace Test1_Blue_Api.Models
         [Required]
         public int PatientNumber { get; set; }
 
-
-        public Area Area { get; set; }  // Navigation property
-        public Company Company { get; set; }  // Navigation property
+        public ICollection<Ticket>? Ticket { get; set; }
 
 
         public DateTime? CreationDate { get; set; } = DateTime.Now;

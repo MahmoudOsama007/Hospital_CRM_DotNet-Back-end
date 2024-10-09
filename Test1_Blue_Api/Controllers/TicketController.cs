@@ -46,6 +46,31 @@ namespace Test1_Blue_Api.Controllers
         }
 
         // POST: api/ticket
+        // POST: api/ticket
+        //[HttpPost]
+        //public async Task<ActionResult<TicketDto>> PostTicket(TicketDto ticketDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    // Check if the CustomerId exists
+        //    var customerExists = await _context.Customers.AnyAsync(c => c.Id == ticketDto.CustomerId);
+        //    if (!customerExists)
+        //    {
+        //        return BadRequest($"Customer with ID {ticketDto.CustomerId} does not exist.");
+        //    }
+
+        //    var ticket = _mapper.Map<Ticket>(ticketDto);
+        //    ticket.CreationDate = DateTime.Now;
+        //    ticket.ModifiedDate = DateTime.Now;
+
+        //    _context.Tickets.Add(ticket);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction("GetTicket", new { id = ticket.Id }, _mapper.Map<TicketDto>(ticket));
+        //}
         [HttpPost]
         public async Task<ActionResult<TicketDto>> PostTicket(TicketDto ticketDto)
         {
@@ -54,7 +79,24 @@ namespace Test1_Blue_Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Check if the CustomerId exists
+            var customerExists = await _context.Customers.AnyAsync(c => c.Id == ticketDto.CustomerId);
+            if (!customerExists)
+            {
+                return BadRequest($"Customer with ID {ticketDto.CustomerId} does not exist.");
+            }
+
+            // Retrieve the current highest ticket number for the specified customer
+            var currentTicket = await _context.Tickets
+                .Where(t => t.CustomerId == ticketDto.CustomerId)
+                .OrderByDescending(t => t.TicketNumber)
+                .FirstOrDefaultAsync();
+
+            // Determine the new ticket number
+            int newTicketNumber = (currentTicket?.TicketNumber ?? 0) + 1; // Increment ticketNumber
+
             var ticket = _mapper.Map<Ticket>(ticketDto);
+            ticket.TicketNumber = newTicketNumber; // Assign the new ticket number
             ticket.CreationDate = DateTime.Now;
             ticket.ModifiedDate = DateTime.Now;
 
@@ -63,6 +105,7 @@ namespace Test1_Blue_Api.Controllers
 
             return CreatedAtAction("GetTicket", new { id = ticket.Id }, _mapper.Map<TicketDto>(ticket));
         }
+
 
         // PUT: api/ticket/5
         [HttpPut("{id}")]

@@ -12,5 +12,7 @@
         public string? OtherPhoneNumber { get; set; }
         public string? LandLineNumber { get; set; }
         public int PatientNumber { get; set; }
+       // public ICollection<Ticket> Ticket { get; set; }
+
     }
 }

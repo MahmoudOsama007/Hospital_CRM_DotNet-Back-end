@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test1_Blue_Api.Data;
 
@@ -11,9 +12,11 @@ using Test1_Blue_Api.Data;
 namespace Test1_Blue_Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009065244_edit-ticketv2")]
+    partial class editticketv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1370,18 +1373,21 @@ namespace Test1_Blue_Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AssignedHospitalId")
+                    b.Property<string>("AssignedHospitalId")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CallAboutId")
-                        .HasColumnType("int");
+                    b.Property<string>("CallAboutId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CallServiceId")
-                        .HasColumnType("int");
+                    b.Property<string>("CallServiceId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CallTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("CallTypeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
@@ -1396,8 +1402,9 @@ namespace Test1_Blue_Api.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
+                    b.Property<string>("DoctorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1405,11 +1412,11 @@ namespace Test1_Blue_Api.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("MajorSpecialistId")
-                        .HasColumnType("int");
+                    b.Property<string>("MajorSpecialistId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MinorSpecialistId")
-                        .HasColumnType("int");
+                    b.Property<string>("MinorSpecialistId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -1420,8 +1427,8 @@ namespace Test1_Blue_Api.Migrations
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("VerySpecificSpecialistId")
-                        .HasColumnType("int");
+                    b.Property<string>("VerySpecificSpecialistId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

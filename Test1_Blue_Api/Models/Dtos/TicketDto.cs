@@ -10,47 +10,40 @@ namespace Test1_Blue_Api.Models.Dtos
         // Name of the Customer
         [Required]
         public string CustomerName { get; set; }
-        // Address details
-        [DataType("nvarchar(max)")]
-        public string? Address { get; set; }
-        // ID of the assigned area
-        [Required]
-        public string AssignedAreaId { get; set; }
-        // ID of the assigned city
-        [Required]
-        public string AssignedCityId { get; set; }
-        // ID of the assigned company
-        [Required]
-        public string AssignedCompanyId { get; set; }
-        // Phone numbers
-        [Required]
-        public string PhoneNumber { get; set; }
-        public string? OtherPhoneNumber { get; set; }
-        public string? LandLineNumber { get; set; }
-        // Patient number
-        [Required]
-        public int PatientNumber { get; set; }
+        //// Address details
+        //[DataType("nvarchar(max)")]
+        //public string? Address { get; set; }
 
+        //// Phone numbers
+        //[Required]
+        //public string? PhoneNumber { get; set; }
+        //public string? OtherPhoneNumber { get; set; }
+        //public string? LandLineNumber { get; set; }
+        //// Patient number
+        //[Required]
+        //public int? PatientNumber { get; set; }
+        
         public int? CustomerId{ get; set; }
+     
 
-
-        public string CallTypeId { get; set; }
-        public string CallAboutId { get; set; }
-        public string CallServiceId { get; set; }
+        public int CallTypeId { get; set; }
+        public int CallAboutId { get; set; }
+        public int CallServiceId { get; set; }
 
 
 
         // ID of the assigned hospital
         [Required]
-        public string? AssignedHospitalId { get; set; }
+        public int? AssignedHospitalId { get; set; }
         // IDs for specialists
-        public string? MajorSpecialistId { get; set; }
-        public string? MinorSpecialistId { get; set; }
-        public string? VerySpecificSpecialistId { get; set; }
+        public int? MajorSpecialistId { get; set; }
+        public int? MinorSpecialistId { get; set; }
+        public int? VerySpecificSpecialistId { get; set; }
         // ID of the assigned doctor
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
 
+        public int? TicketNumber { get; set; }
 
 
 
